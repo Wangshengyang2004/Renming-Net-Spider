@@ -36,8 +36,9 @@ def get_article_content(article_url):
 
 def extract_links(url):
     headers = {
-        'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/58.0.3029.110 Safari/537.3'
+        'User-Agent':  get_random_user_agent()
     }
+    print(headers)
     response = requests.get(url, headers=headers)
     soup = BeautifulSoup(response.text, 'html.parser')
 
@@ -48,8 +49,9 @@ def extract_links(url):
 
 def get_article_links(page_url):
     headers = {
-        'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/58.0.3029.110 Safari/537.3'
+        'User-Agent':  get_random_user_agent()
     }
+    print(headers)
     response = requests.get(page_url)
     soup = BeautifulSoup(response.text, 'html.parser')
 
@@ -64,8 +66,9 @@ def generate_page_urls(base_url, num_pages):
 
 def extract_info(url):
     headers = {
-        "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/58.0.3029.110 Safari/537.3"
+        'User-Agent':  get_random_user_agent()
     }
+    print(headers)
     response = requests.get(url, headers=headers)
     response.encoding = 'utf-8'  # Set the correct encoding
     soup = BeautifulSoup(response.text, 'html.parser')
@@ -88,7 +91,7 @@ def extract_info(url):
 
 
 base_url = "http://jhsjk.people.cn/result"
-page_urls = generate_page_urls(base_url, 20)
+page_urls = generate_page_urls(base_url, 200)
 db = []
 for page_url in page_urls:
     article_links = extract_links(page_url)
